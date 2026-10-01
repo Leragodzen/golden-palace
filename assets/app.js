@@ -10,8 +10,7 @@
   var sbar = document.querySelector('.scrollbar');
   var thumb = document.querySelector('.scrollbar-thumb');
   var fab = document.querySelector('[data-fab]');
-  var pill = fab && fab.querySelector('.fab-pill');
-  var pillShown = false, ticking = false;
+  var ticking = false;
 
   function onScroll() {
     var y = window.scrollY || 0;
@@ -28,13 +27,6 @@
 
     /* виджет связи не закрывает первый экран */
     if (fab) fab.classList.toggle('on', y > window.innerHeight * 0.55);
-
-    /* плашка «поможем рассчитать» показывается один раз и уезжает */
-    if (pill && !pillShown && y > window.innerHeight * 0.8) {
-      pillShown = true;
-      pill.classList.add('show');
-      setTimeout(function () { pill.classList.remove('show'); }, 7000);
-    }
   }
   window.addEventListener('scroll', function () {
     if (ticking) return;
@@ -42,6 +34,12 @@
     requestAnimationFrame(function () { onScroll(); ticking = false; });
   }, { passive: true });
   window.addEventListener('resize', onScroll, { passive: true });
+  /* вернулись на вкладку или назад по истории — пересчитываем сразу,
+     иначе кнопка и ползунок остались бы в старом положении */
+  document.addEventListener('visibilitychange', function () {
+    if (!document.hidden) onScroll();
+  });
+  window.addEventListener('pageshow', onScroll);
   onScroll();
 
   if (fab) {
