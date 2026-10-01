@@ -5,16 +5,59 @@
   var PHONE = '79272684888';
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* ---------- шапка: фон при прокрутке ---------- */
+  /* ---------- шапка, свой ползунок прокрутки, виджет связи ---------- */
   var hdr = document.querySelector('.hdr');
-  var bar = document.querySelector('.bar');
+  var sbar = document.querySelector('.scrollbar');
+  var thumb = document.querySelector('.scrollbar-thumb');
+  var fab = document.querySelector('[data-fab]');
+  var pill = fab && fab.querySelector('.fab-pill');
+  var pillShown = false, ticking = false;
+
   function onScroll() {
     var y = window.scrollY || 0;
     if (hdr) hdr.classList.toggle('stuck', y > 40);
-    if (bar) bar.classList.toggle('on', y > window.innerHeight * 0.7);
+
+    if (sbar && thumb) {
+      var max = document.documentElement.scrollHeight - window.innerHeight;
+      sbar.classList.toggle('on', max > 300 && y > 120);
+      if (max > 0) {
+        var rail = sbar.clientHeight - thumb.offsetHeight;
+        thumb.style.transform = 'translate(-50%,' + (Math.min(1, y / max) * rail).toFixed(1) + 'px)';
+      }
+    }
+
+    /* виджет связи не закрывает первый экран */
+    if (fab) fab.classList.toggle('on', y > window.innerHeight * 0.55);
+
+    /* плашка «поможем рассчитать» показывается один раз и уезжает */
+    if (pill && !pillShown && y > window.innerHeight * 0.8) {
+      pillShown = true;
+      pill.classList.add('show');
+      setTimeout(function () { pill.classList.remove('show'); }, 7000);
+    }
   }
-  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('scroll', function () {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function () { onScroll(); ticking = false; });
+  }, { passive: true });
+  window.addEventListener('resize', onScroll, { passive: true });
   onScroll();
+
+  if (fab) {
+    var fabBtn = fab.querySelector('.fab-btn');
+    fabBtn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var open = fab.classList.toggle('open');
+      fabBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    document.addEventListener('click', function (e) {
+      if (fab.classList.contains('open') && !fab.contains(e.target)) {
+        fab.classList.remove('open');
+        fabBtn.setAttribute('aria-expanded', 'false');
+      }
+    });
+  }
 
   /* ---------- меню на телефоне ---------- */
   var burger = document.querySelector('.burger');
@@ -34,6 +77,8 @@
       document.body.classList.remove('menu-open', 'lock');
       var lb = document.querySelector('.lb.on');
       if (lb) lb.classList.remove('on');
+      var f = document.querySelector('.fab.open');
+      if (f) f.classList.remove('open');
     }
   });
 

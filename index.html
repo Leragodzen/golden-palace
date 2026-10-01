@@ -13,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Forum&family=Spectral:wght@200;300;400&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/style.css?v=3">
+<link rel="stylesheet" href="assets/style.css?v=5">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"EventVenue","name":"Golden Palace","description":"Банкетный зал в Тольятти на 400 гостей","address":{"@type":"PostalAddress","streetAddress":"ул. Спортивная, 9А","addressLocality":"Тольятти","addressRegion":"Самарская область","addressCountry":"RU"},"telephone":"+7-927-268-48-88","maximumAttendeeCapacity":400,"aggregateRating":{"@type":"AggregateRating","ratingValue":"4.7","reviewCount":"59","bestRating":"5"},"sameAs":["https://vk.com/goldenpalace63","https://www.instagram.com/golden_palace.63/"]}
 </script>
@@ -50,7 +50,7 @@
 
 <section class="hero">
   <figure class="hero-ph">
-    <img src="photo/zal-obshiy.jpg" alt="Банкетный зал Golden Palace в Тольятти: круглые столы, хрустальные люстры, сцена" fetchpriority="high">
+    <img src="photo/scena-ekran.jpg" alt="Хрустальная люстра, сцена и большой экран в зале Golden Palace" fetchpriority="high">
   </figure>
   <div class="hero-glow"></div>
   <div class="motes"></div>
@@ -89,7 +89,7 @@
       <p class="lead">Архитектура зала сочетает современные тенденции и классические элементы. Просторный интерьер с хрустальными люстрами и элегантной отделкой, профессиональный свет и звук, четыре больших экрана.</p>
       <a class="link-more" href="zal.html">Зал и схемы рассадки</a>
     </div>
-    <figure class="ph has-img r-4x3 "><img src="photo/scena-ekran.jpg" alt="Сцена с большим экраном и хрустальная люстра в зале Golden Palace" loading="lazy" decoding="async"></figure>
+    <figure class="ph has-img r-16x9 "><img src="photo/zal-shirokiy.jpg" alt="Банкетный зал Golden Palace: круглые столы, хрустальные люстры, сцена" loading="lazy" decoding="async"></figure>
   </div>
 </section>
 
@@ -175,7 +175,7 @@
 
 <section class="section section--ivory">
   <div class="wrap split split--rev">
-    <figure class="ph has-img r-4x3 "><img src="photo/stol-zakuski.jpg" alt="Банкетный стол с холодными закусками и фруктами" loading="lazy" decoding="async"></figure>
+    <figure class="ph has-img r-4x3 "><img src="photo/frukty-wide.jpg" alt="Фруктовые композиции на банкетном столе" loading="lazy" decoding="async"></figure>
     <div data-reveal data-d="1">
       <p class="eyebrow">Кухня</p>
       <h2 class="h2">Банкетное меню собираем вместе</h2>
@@ -320,11 +320,19 @@
   </div>
 </footer>
 
-<div class="bar">
-  <a class="btn btn--ghost" href="tel:+79272684888">Позвонить</a>
-  <a class="btn btn--gold" href="#bron">Забронировать</a>
-</div>
+<div class="scrollbar" aria-hidden="true"><div class="scrollbar-thumb"></div></div>
 
-<script src="assets/app.js?v=3"></script>
+<div class="fab" data-fab>
+  <div class="fab-pill">Поможем рассчитать банкет</div>
+  <div class="fab-list">
+    <a href="tel:+79272684888"><b>Позвонить</b><span>+7 927 268-48-88</span></a>
+    <a href="https://wa.me/79272684888" target="_blank" rel="noopener"><b>WhatsApp</b><span>написать в мессенджер</span></a>
+    <a href="#bron"><b>Оставить заявку</b><span>рассчитаем банкет</span></a>
+  </div>
+  <button class="fab-btn" type="button" aria-label="Связаться с залом" aria-expanded="false">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.4.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.4 0 .8-.2 1l-2.3 2.2z"/></svg>
+  </button>
+</div>
+<script src="assets/app.js?v=5"></script>
 </body>
 </html>
