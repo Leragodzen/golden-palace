@@ -135,6 +135,25 @@
     return dec ? v.toFixed(1).replace('.', ',') : Math.round(v).toString();
   }
 
+  /* ---------- заголовок собирается из букв ----------
+     Разбиваем слово на буквы, каждой — свой номер для задержки.
+     Текст для скринридеров остаётся в aria-label на заголовке. */
+  var split = document.querySelector('[data-split]');
+  if (split && !reduce) {
+    var n = 0;
+    split.querySelectorAll('i').forEach(function (word) {
+      var text = word.textContent;
+      word.textContent = '';
+      word.setAttribute('aria-hidden', 'true');
+      text.split('').forEach(function (ch) {
+        var u = document.createElement('u');
+        u.textContent = ch;
+        u.style.setProperty('--i', n++);
+        word.appendChild(u);
+      });
+    });
+  }
+
   /* ---------- пылинки света в первом экране ---------- */
   var motes = document.querySelector('.motes');
   if (motes && !reduce) {
